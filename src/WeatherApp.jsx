@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 export const WeatherApp = () => {
 	const urlBase = "https://api.openweathermap.org/data/2.5/weather"; //?q={city name}&appid={API key}
-	const API_KEY = "552cccaf83cbbde84efa57e22ef241b0";
 	const difKelvin = 273.15;
 
 	const [city, setCity] = useState("");
@@ -20,7 +19,9 @@ export const WeatherApp = () => {
 
 	const fetchWeather = async () => {
 		try {
-			const response = await fetch(`${urlBase}?q=${city}&appid=${API_KEY}`);
+			const response = await fetch(
+				`${urlBase}?q=${city}&appid=${import.meta.env.VITE_REACT_API_KEY}`
+			);
 			const data = await response.json();
 			//console.log(data);
 			if (data.cod == 404) return;
